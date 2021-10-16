@@ -1,16 +1,19 @@
 <template>
   <div>
     <h1>This is Employees Component</h1>
-    <employees-table-component :employees ="employees"></employees-table-component>
+    <employee-form-component @add:employeeInfo="updateEmployees"></employee-form-component>
+    <!-- <employee-form-component v-on:employeeInfo="updateEmployees($event)"></employee-form-component> -->
+    <employees-table-component :employees ="employees" ></employees-table-component>
   </div>
 </template>
 
 <script>
 
 import EmployeesTableComponent from './EmployeesTableComponent.vue'
+import EmployeeFormComponent from './EmployeeFormComponent.vue'
 
 export default {
-  components: { EmployeesTableComponent },
+  components: { EmployeesTableComponent,  EmployeeFormComponent},
 data(){
   return{
     employees: [
@@ -37,6 +40,14 @@ data(){
     ]
   }
   
+},
+methods:{
+  updateEmployees(employee){
+    console.log(employee.employeeEmail)
+    // console.log('This is Employee Info', employeeInfo.name)
+    this.employees = [...this.employees, employee]
+    console.log(this.employees)
+  }
 }
 }
 </script>
